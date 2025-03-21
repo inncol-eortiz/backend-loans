@@ -43,7 +43,7 @@ async def read_active_users(
     return db_users
 
 
-@protected_route.get("/user/{id}", response_model=schemas.user.User, tags=["Users"])
+@protected_route.get("/users/{id}", response_model=schemas.user.User, tags=["Users"])
 async def read_user(id: int, db: Session = Depends(get_db)):
     db_user = crud.users.get_user(db=db, id=id)
     if db_user is None:
@@ -59,7 +59,7 @@ def create_user(user: schemas.user.UserCreate, db: Session = Depends(get_db)):
     return crud.users.create_user(db=db, user=user)
 
 
-@protected_route.put("/user/{id}", response_model=schemas.user.User, tags=["Users"])
+@protected_route.put("/users/{id}", response_model=schemas.user.User, tags=["Users"])
 async def update_user(
     id: int, user: schemas.user.UserUpdate, db: Session = Depends(get_db)
 ):
@@ -69,7 +69,7 @@ async def update_user(
     return db_user
 
 
-@protected_route.delete("/user/{id}", response_model=schemas.user.User, tags=["Users"])
+@protected_route.delete("/users/{id}", response_model=schemas.user.User, tags=["Users"])
 async def delete_user(id: int, db: Session = Depends(get_db)):
     try:
         db_user = crud.users.delete_user(db=db, id=id)

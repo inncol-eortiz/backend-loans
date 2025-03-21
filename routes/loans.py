@@ -31,7 +31,7 @@ async def read_loans(skip: int = 0, limit: int = 10, db: Session = Depends(get_d
     return db_loans
 
 
-@protected_route.get("/loan/{id}", response_model=schemas.loans.Loan, tags=["Loans"])
+@protected_route.get("/loans/{id}", response_model=schemas.loans.Loan, tags=["Loans"])
 async def read_loan(id: int, db: Session = Depends(get_db)):
     db_loan = crud.loans.get_loan(db=db, loan_id=id)
     if db_loan is None:
@@ -48,7 +48,7 @@ def create_loan(loan: schemas.loans.LoanCreate, db: Session = Depends(get_db)):
     return {"message": "Loan created successfully"}
 
 
-@protected_route.put("/loan/{id}", response_model=schemas.loans.Loan, tags=["Loans"])
+@protected_route.put("/loans/{id}", response_model=schemas.loans.Loan, tags=["Loans"])
 async def update_loan(
     id: int, loan: schemas.loans.LoanUpdate, db: Session = Depends(get_db)
 ):
@@ -58,7 +58,7 @@ async def update_loan(
     return db_loan
 
 
-@protected_route.delete("/loan/{id}", response_model=schemas.loans.Loan, tags=["Loans"])
+@protected_route.delete("/loans/{id}", response_model=schemas.loans.Loan, tags=["Loans"])
 async def delete_loan(id: int, db: Session = Depends(get_db)):
     db_loan = crud.loans.delete_loan(db=db, loan_id=id)
     if db_loan is None:

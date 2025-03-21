@@ -31,7 +31,7 @@ async def read_materials(skip: int = 0, limit: int = 10, db: Session = Depends(g
 
 
 @protected_route.get(
-    "/material/{id}", response_model=schemas.material.Material, tags=["Materials"]
+    "/materials/{id}", response_model=schemas.material.Material, tags=["Materials"]
 )
 async def read_material(id: int, db: Session = Depends(get_db)):
     db_material = crud.material.get_material(db=db, material_id=id)
@@ -59,7 +59,7 @@ def create_material(
 
 
 @protected_route.put(
-    "/material/{id}", response_model=schemas.material.Material, tags=["Materials"]
+    "/materials/{id}", response_model=schemas.material.Material, tags=["Materials"]
 )
 async def update_material(
     id: int, material: schemas.material.MaterialUpdate, db: Session = Depends(get_db)
@@ -72,7 +72,7 @@ async def update_material(
     return db_material
 
 
-@protected_route.delete("/material/{id}", response_model=dict, tags=["Materials"])
+@protected_route.delete("/materials/{id}", response_model=dict, tags=["Materials"])
 async def delete_material(id: int, db: Session = Depends(get_db)):
     result = crud.material.delete_material(db=db, material_id=id)
     if result == "Material deleted successfully":
