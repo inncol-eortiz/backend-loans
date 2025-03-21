@@ -32,7 +32,7 @@ async def login(request: LoginRequest, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Invalid username or password")
 
     token = get_token({"sub": user.email})
-    return {"access_token": token, "token_type": "bearer"}
+    return {"access_token": token, "token_type": "bearer", "user": user}
 
 
 @auth.post("/register", response_model=schemas.user.User, tags=["Auth"])
